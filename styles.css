@@ -1,0 +1,70 @@
+body {
+	background-color: #9FE2DF;
+	font-family: arial;
+	font-size: 14px; 
+	margin: 0;
+	padding: 0 2em;
+}
+
+h1 {
+	background: url(images/cart.png) top right no-repeat;
+	background-size: 15% 100%;
+    padding: 90px 30px;
+    position: relative;
+}
+
+.totalCount {
+	background: #ff877f;
+    border: 2px solid #ff877f;
+	border-radius: 50%;      
+    color: #000;
+    font-size: 32px;
+    text-align: center;
+    height: 36px;
+    padding: 8px;    
+	position: absolute; 
+    top: -10px;
+    right: 25px; 
+	width: 36px;
+}
+
+.cartWrapper {
+	height: 100%;
+	padding-top: 50px;
+	width: 100%;
+}
+
+table {
+	padding: 1em; 
+	background-color: #E6F3F0;
+    border-radius: 10px;
+    border: 1px solid #167F92;
+}
+
+table tbody {
+	text-align: center;
+}
+
+table th {
+	width: 25%;
+}
+
+table tr, td {
+	margin: .5em 1em;
+	padding: 1em;
+}
+
+.remove a{
+	background: url(images/delete.png) center right no-repeat;
+    background-size: 20px 20px;    
+    display: block;
+    height: 25px;
+    width: 25px;
+}
+
+.total {
+    float: right;
+    padding-top: 30px;
+    font-size: 16px;
+    font-weight: bold;
+}
