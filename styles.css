@@ -1,5 +1,5 @@
 body {
-	background-color: #9FE2DF;
+	background-color: #8D9090;
 	font-family: arial;
 	font-size: 14px; 
 	margin: 0;
@@ -9,7 +9,7 @@ body {
 h1 {
 	background: url(images/cart.png) top right no-repeat;
 	background-size: 15% 100%;
-    padding: 90px 30px;
+    padding: 70px 30px;
     position: relative;
 }
 
@@ -30,8 +30,23 @@ h1 {
 
 .cartWrapper {
 	height: 100%;
-	padding-top: 50px;
 	width: 100%;
+}
+
+.cartWrapper ul {	    
+    float: left;
+    margin: 0 auto;
+    width: 98%;
+}
+.cartWrapper li {
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    cursor: pointer;
+    height: 350px;
+    list-style: none;
+    float: left;
+    margin: 0 2%;    
+    width: 28%;
 }
 
 table {
