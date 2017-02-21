@@ -1,7 +1,7 @@
 function formatCurrency(value) {
     return "$" + value.toFixed(2);
 }
-
+ 
 var CartLine = function() {
     var self = this;
     self.category = ko.observable();
@@ -16,59 +16,47 @@ var CartLine = function() {
         self.product(undefined);
     });
 };
-
-var shouter = new ko.subscribable();
-var selectBrandModel = function(){
-    this.showBrands = ko.observable(true);    
-
-    this.lines1 = ko.observableArray();
-    this.selectBrand = function(event) {       
-       this.lines1.push(event);         
-    }.bind(this);
-
-    this.lines1.subscribe(function(newValue) {
-        shouter.notifySubscribers(newValue, "productsToPublish");
-        selectBrandModel.showBrands(false);
-    });
-   
-};
-
-var selectMobileModel = function(){    
-    this.showMobiles = ko.observable(false);  
-
-    this.productsArray=ko.observableArray();
-    shouter.subscribe(function(newValue) {
-        this.productsArray(newValue);
-        console.log("sdsdsdsdsdsds "+this.productsArray(newValue));
-        selectMobileModel.showMobiles(true);
-    }, this, "productsToPublish");
-
+ 
+var Cart = function() {
     // Stores an array of lines, and from these, can work out the grandTotal
     var self = this;
     self.lines = ko.observableArray([new CartLine()]); // Put one line in by default
     self.grandTotal = ko.computed(function() {
         var total = 0;
-        $.each(self.lines(), function() { total += this.subtotal() })
+        $.each(self.lines(), function() { 
+            total += this.subtotal();
+        });
         return total;
-    });
+    });    
  
     // Operations
-    self.addLine = function() { self.lines.push(new CartLine()) };
-    self.removeLine = function(line) { self.lines.remove(line) };
+    self.addLine = function() { 
+        self.lines.push(new CartLine());
+    };
+
+    self.removeLine = function(line) { 
+        self.lines.remove(line);
+    };
+
+    self.totalItems = ko.computed(function() {
+        var count = 0;
+        $.each(self.lines(), function() {            
+            if(this.subtotal() > 0) {
+                count += parseInt(this.quantity());
+            }            
+        });
+        return count;
+    });
+
     self.save = function() {
         var dataToSave = $.map(self.lines(), function(line) {
             return line.product() ? {
                 productName: line.product().name,
                 quantity: line.quantity()
-            } : undefined
+            } : undefined;
         });
-        alert("Could now send this to server: " + JSON.stringify(dataToSave));
+        alert("Saved");
     };
 };
-
-var homeModel = (function(){
-    this.selectBrandModel =  new selectBrandModel(),
-    this.selectMobileModel = new selectMobileModel();
-})();
-
-ko.applyBindings(homeModel);
+ 
+ko.applyBindings(new Cart());
