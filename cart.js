@@ -21,12 +21,12 @@ var shouter = new ko.subscribable();
 var selectBrandModel = function(){
     this.showBrands = ko.observable(true);    
 
-    this.lines = ko.observableArray();
+    this.lines1 = ko.observableArray();
     this.selectBrand = function(event) {       
-       this.lines.push(event);         
+       this.lines1.push(event);         
     }.bind(this);
 
-    this.lines.subscribe(function(newValue) {
+    this.lines1.subscribe(function(newValue) {
         shouter.notifySubscribers(newValue, "productsToPublish");
         selectBrandModel.showBrands(false);
     });
@@ -39,9 +39,10 @@ var selectMobileModel = function(){
     this.productsArray=ko.observableArray();
     shouter.subscribe(function(newValue) {
         this.productsArray(newValue);
+        console.log("sdsdsdsdsdsds "+this.productsArray(newValue));
         selectMobileModel.showMobiles(true);
     }, this, "productsToPublish");
-    console.log("sdsdsdsdsdsds "+this.productsArray);
+
     // Stores an array of lines, and from these, can work out the grandTotal
     var self = this;
     self.lines = ko.observableArray([new CartLine()]); // Put one line in by default
